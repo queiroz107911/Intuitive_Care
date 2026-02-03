@@ -1,0 +1,22 @@
+
+venv/
+
+__pycache__/
+
+.vscode/
+.idea/
+
+# Etapa01
+Intuitive_Care/Etapa01/data/Planilhas_originais/*.csv
+Intuitive_Care/Etapa01/data/Planilhas_tratadas/*.csv
+Intuitive_Care/Etapa01/data/Resultado/*.csv
+Intuitive_Care/Etapa01/data/ResultadoFinal/*.csv
+
+# Etapa02
+Intuitive_care02/Etapa02/consolidado_Etapa01/*.csv
+Intuitive_care02/Etapa02/dados_cadastrais/*.csv
+Intuitive_care02/Etapa02/planilha_final/*.csv
+Intuitive_care02/Etapa02/pos_merge/*.csv
+
+# Etapa03
+Intuitive_care03/Etapa03/data/*.csv
