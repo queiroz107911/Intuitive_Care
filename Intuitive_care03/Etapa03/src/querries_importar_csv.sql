@@ -1,3 +1,6 @@
+USE intuitive_care_database;
+
+
 -- importacao conmsolidado_despesas
 LOAD DATA LOCAL INFILE 'C:/Users/jpque/OneDrive/Desktop/Intuitive_Care_Teste/Intuitive_Care03/Etapa03/data/consolidado_despesas.csv'
 INTO TABLE despesas_consolidadas 
@@ -5,7 +8,7 @@ CHARACTER SET utf8mb4 -- encoding (UTF-8)
 FIELDS TERMINATED BY ';' -- colunas no CSV são separadas por ';'
 LINES TERMINATED BY '\n' -- cada linha termina com quebra de linha
 IGNORE 1 LINES -- ignora o cabeçalho do CSV
-(REG_ANS, CNPJ, ValorDespesas, Ano, Trimestre)
+(REG_ANS, CNPJ, Razao_Social, Modalidade, UF, ValorDespesas, Ano, Trimestre)
 
 SET -- tratamento de possiveis inconsistencias nos dados
     

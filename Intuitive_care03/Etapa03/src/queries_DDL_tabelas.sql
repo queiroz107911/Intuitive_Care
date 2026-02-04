@@ -5,12 +5,16 @@
 -- Queries analíticas mais limpas com JOIN
 -- Evita redundância e inconsistência
 
+USE intuitive_care_database;
 
 -- data/consolidado_despesas.csv
 CREATE TABLE despesas_consolidadas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     REG_ANS INT NOT NULL,
     CNPJ VARCHAR(14) NOT NULL,
+    Razao_Social VARCHAR(255) NOT NULL,
+    Modalidade VARCHAR(150),
+    UF CHAR(2),
     ValorDespesas DECIMAL(14,2) NOT NULL,
     Ano INT NOT NULL,
     Trimestre INT NOT NULL
@@ -95,3 +99,5 @@ CREATE TABLE despesas_agregadas (
 -- decimal(p, s) --> precision(total de digitos) / scale(quantas casas decimais) 
 -- garantir precisão exata e suportar valores financeiros elevados sem risco de overflow 
 -- melhor que float e mais legivel
+
+

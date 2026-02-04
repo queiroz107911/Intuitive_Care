@@ -34,6 +34,15 @@ Responsável por grande parte de processamento das 4 etapas do projeto incluindo
 - pandas → manipulação e análise de dados
 - pathlib → organização e portabilidade dos caminhos do projeto (padrão do python)
 - re → tratamento de strings e normalização de campos (padrão do python)
+- fastapi → framework para desenvolvimento de APIs REST de alta performance
+- uvicorn → servidor ASGI utilizado para executar a aplicação FastAPI
+- sqlalchemy → ORM e engine de conexão com o banco de dados
+- pymysql → driver MySQL utilizado pelo SQLAlchemy
+- python-dotenv → carregamento de variáveis de ambiente a partir de arquivos .env
+- pydantic → validação, tipagem e serialização de dados
+- starlette → framework base utilizado internamente pelo FastAPI
+- numpy → suporte a operações numéricas e integração com o pandas
+- mysql → connector-python → driver alternativo para conexão com MySQL
 
 ---
 ### MySQL
@@ -46,16 +55,6 @@ Utilizado somente na Etapa 03 para estruturar e organizar os dados importados do
 - Criação de queries DDL para estruturar as tabelas
 - Queries de importação para inserir dados de arquivo CSV nas tabelas
 - Queries analíticas para análise e geração de relatórios
-
----
-### Vue.js
-
-Planejado para a camada de visualização do projeto e utilizando somente na Etapa 04
-
-- Criação de dashboards e tabelas interativas
-- Consumo dos dados já processados pelo backend
-- Facilitação da análise dos resultados por usuários finais
-- (Não utilizado diretamente na Etapa 02, mas definido como parte da arquitetura futura do sistema)
 
 --- 
 
@@ -87,6 +86,12 @@ A estrutura do projeto foi organizada de forma modular para facilitar manutenç�
 - ```README.md``` -> documentar decisões técnicas e trade-offs da Etapa03
 
 > ⚠️ Observação: Testei diferentes arquiteturas de modularização e a estratégia usada na Etapa 03 foi a melhor. A organização com apenas data/ e src/ deixa o projeto mais objetivo e limpo, sem poluição visual de múltiplas pastas e arquivos desnecessários 
+
+### Intuitive_care03/Etapa04/
+- ```src``` -> arquivos Python para criação da API 
+- ```README.md``` -> documentar decisões técnicas e trade-offs da Etapa04
+
+
 ---
 
 
@@ -135,6 +140,128 @@ A estrutura do projeto foi organizada de forma modular para facilitar manutenç�
 -> Criar queries de importação para inserir dados nas tabelas, atentando-se ao encoding e tratamento de inconsistências
 
 -> Desenvolver queries analíticas para responder perguntas de negócios
+
+---
+
+  - **Etapa 04 - Teste de API e Interface Web**
+
+-> Utilizar os dados do banco de dados criado na Etapa 03 e criar uma API com Flask ou FastAPI
+
+-> Criar rotas específicas para a API, escolher estratégia de paginação e estrutura de resposta
+
+-> Desenvolver uma interface web usando Vue.js que interaja com a API em Python
+
+-> Documentar a API demonstrando todas as rotas e exemplos de requisições e respostas esperadas
+
+---
+
+
+## ▶️ Como executar
+
+O projeto é dividido em 4 etapas (ETL → Enriquecimento → Banco → API). Execute na ordem para garantir que os arquivos e tabelas existam
+
+**1. Para início de tudo:**
+
+Garanta os pré-requisitos:
+  - Python 3.9 ou superior
+
+  - MySQL 8.0 ou superior
+  - Cliente MySQL (MySQL Workbench ou via terminal)
+  - ```bash 
+    python -m venv venv
+    
+    pip install -r requirement.txt
+
+Com isso, o ambiente virtual (venv) estará criado e as dependências do projeto serão instaladas
+
+---
+**2. Etapa 01: Integração + Consolidação dos Dados (Python)**
+
+**Preparação:**
+
+- Coloque os arquivos CSV brutos na pasta ```Intuitive_Care/Etapa01/data/Planilhas_originais/```
+- Garanta que as pastas de saída existam
+
+- **Execução:**
+  ```bash
+  cd Intuitive_Care/Etapa01
+  python -m src.filtrar_&_juntar_csv
+  python -m src.merge_de_arquivos
+  python -m src.organizar_planilha
+
+---
+**3. Etapa 02: Validação + Join com Dados Cadastrais (Python)**
+
+- Confirme que você tem:
+
+    - ```consolidado_despesas.csv``` (gerado na Etapa 01)
+
+    - CSV cadastral (ex: Relatorio_cadop.csv) dentro de: ```Intuitive_care02/Etapa02/dados_cadastrais/```
+
+    - O consolidado deve estar em: ```Intuitive_care02/Etapa02/consolidado_Etapa01/```
+
+- **Execução:**
+  ```bash
+  cd Intuitive_care02/Etapa02
+  python -m src.validacoes
+  python -m src.merge_arquivos
+  python -m src.agregacao_dados 
+
+---
+**4. Etapa 03: Banco de Dados e Análises (MySQL)**
+
+- Nesta etapa você cria as tabelas no MySQL, importa os CSVs e executa queries analíticas
+
+- **Configuração:**
+    Crie o banco e selecione ele:
+    ```bash 
+    CREATE DATABASE intuitive_care_database;
+
+    USE intuitive_care_database;
+
+- **Execução:**
+
+  - Criar tabelas (DDL) 
+  
+  Rodar o arquivo ```Intuitive_care03/Etapa03/src/queries_DDL_tabelas.sql```
+
+  - Importar CSVs para as tabelas
+
+  Rodar o arquivo ```Intuitive_care03/Etapa03/src/queries_importar_csv.sql```
+
+  - Rodar queries analíticas
+
+  Rodar o arquivo ```Intuitive_care03/Etapa03/src/queries_analiticas.sql```
+
+---
+
+**5. Etapa 04: API (FastAPI)**
+- Nesta etapa você sobe a API para consultar operadoras, histórico de despesas e dados paginados diretamente do banco
+
+- Crie um arquivo ```.env``` em ```Intuitive_care04/Etapa04/.env``` com essas informações dentro:
+  ```bash 
+  DB_HOST=localhost
+  DB_PORT=3306
+  DB_USER=root
+  DB_PASSWORD=sua_senha
+  DB_NAME=intuitive_care_database 
+
+- Crie os arquivos Python dentro src
+
+- **Execução:**
+  ```bash 
+  cd Intuitive_care04/Etapa04
+  uvicorn src.main:app --reload
+
+
+
+> **⚠️ Observação:** Dentro do repositório, em cada pasta, se encontra um README relatando decisões técnicas e trade-offs necessários sobre cada Etapa do projeto
+
+
+
+
+
+
 
 
 
