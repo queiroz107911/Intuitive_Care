@@ -253,6 +253,7 @@ Com isso, o ambiente virtual (venv) estará criado e as dependências do projeto
   cd Intuitive_care04/Etapa04
   uvicorn src.main:app --reload
 
+Após iniciar a API, acesse a rota ```/docs``` para visualizar a documentação interativa (Swagger) e testar todas as rotas disponíveis
 
 
 > **⚠️ Observação:** Dentro do repositório, em cada pasta, se encontra um README relatando decisões técnicas e trade-offs necessários sobre cada Etapa do projeto
