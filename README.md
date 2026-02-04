@@ -238,7 +238,7 @@ Com isso, o ambiente virtual (venv) estará criado e as dependências do projeto
 **5. Etapa 04: API (FastAPI)**
 - Nesta etapa você sobe a API para consultar operadoras, histórico de despesas e dados paginados diretamente do banco
 
-- Crie um arquivo ```.env``` em ```Intuitive_care04/Etapa04/.env``` com essas informações dentro:
+- Crie um arquivo ```.env.exemple``` em ```Intuitive_care04/Etapa04/.env``` com essas informações dentro:
   ```bash 
   DB_HOST=localhost
   DB_PORT=3306
